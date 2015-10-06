@@ -3,18 +3,26 @@ package no.frodo.moap.data;
 import no.frodo.moap.domain.City;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 public class JpaCityRepository implements CityRepository {
 
     @Inject
+    private Logger log;
+
+    @Inject
     private EntityManager em;
+
+    @Inject
+    private Event<City> memberEventSrc;
 
     @Override
     public String findByName(String name) {
@@ -26,7 +34,7 @@ public class JpaCityRepository implements CityRepository {
         return null;
     }
 
-    public List<City> findAllOrderedByName() {
+    public List<City> findAllCitiesOrderedByName() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<City> criteria = cb.createQuery(City.class);
         Root<City> city = criteria.from(City.class);
@@ -36,7 +44,9 @@ public class JpaCityRepository implements CityRepository {
 
     @Override
     public void addCity(City city) {
-
+        log.info("Registering " + city.getName());
+        em.persist(city);
+        memberEventSrc.fire(city);
     }
 
     @Override
@@ -47,5 +57,11 @@ public class JpaCityRepository implements CityRepository {
     @Override
     public void updateCity(City account) {
 
+    }
+
+    public void register(City city) throws Exception {
+        log.info("Registering " + city.getName());
+        em.persist(city);
+        memberEventSrc.fire(city);
     }
 }

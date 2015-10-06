@@ -25,12 +25,12 @@ public class CityListProducer {
         return cityList;
     }
 
-    public void onMemberListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final City member) {
+    public void onCityListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final City member) {
         retrieveAllMembersOrderedByName();
     }
 
     @PostConstruct
     public void retrieveAllMembersOrderedByName() {
-        cityList = cityRepository.findAllOrderedByName();
+        cityList = cityRepository.findAllCitiesOrderedByName();
     }
 }

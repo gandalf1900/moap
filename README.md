@@ -14,3 +14,11 @@ Database: H2 in memory
 * Start H2 konsoll på http://localhost:8080/h2console
 * Bruk jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE som JDBC URL og sa/sa som brukernavn/passord (finnes i standalone.xml)
 * Start app på app på http://localhost:8080/moap/
+
+**TODO
+
+0) Legg ved UML kommunikasjonsdiagram for registrer ny by
+1) hent ut værdata for by
+2) generer javaklasser fra wsdl  (ett eksempep bare)
+3) deploy app på openshift
+4) Logg inn modul

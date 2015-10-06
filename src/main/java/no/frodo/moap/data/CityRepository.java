@@ -10,7 +10,7 @@ public interface CityRepository {
 
     public String findByNameLike(String name);
 
-    public List<City> findAllOrderedByName();
+    public List<City> findAllCitiesOrderedByName();
 
     void addCity(City city);
 

@@ -57,8 +57,7 @@
                     href="#{request.contextPath}/rest/city/#{_city.id}">/rest/cities/#{_city.id}</a>
         </h:column>
         <f:facet name="footer">
-            REST URL for all cities: <a
-                href="#{request.contextPath}/rest/cities">/rest/cities</a>
+            REST URL for all cities: <a  href="#{request.contextPath}/rest/cities">/rest/cities</a>
         </f:facet>
     </h:dataTable>
 
@@ -67,8 +66,18 @@
     <h4>Hent ut værdata for by</h4>
     <h:form id="getWeatherForm">
         <h:inputText id="weather" value="" />
-        <h:commandButton value="hent" action="#{weatherController.getWeather}"></h:commandButton>
+        <h:commandButton action="#{weatherController.getWeather}" value="hent"></h:commandButton>
     </h:form>
+
+    <p/>
+
+    <h:panelGroup  layout="block" rendered="#{empty weatherInfo}">
+        <em>ingen værdata hentet</em>
+    </h:panelGroup>
+
+    <h:panelGroup styleClass="weatherData" layout="block" rendered="#{empty weatherInfo}">
+        <em>Her er værdata</em>
+    </h:panelGroup>
 
 
 </h:body>

@@ -1,5 +1,6 @@
 package no.frodo.moap.service;
 
+import no.frodo.moap.data.CityRepository;
 import no.frodo.moap.domain.City;
 
 import javax.ejb.Stateless;
@@ -18,11 +19,22 @@ public class CityRegistrationService {
     private EntityManager em;
 
     @Inject
+    private CityRepository cityRepository;
+
+
+    @Inject
     private Event<City> memberEventSrc;
 
+    /*
     public void register(City city) throws Exception {
         log.info("Registering " + city.getName());
         em.persist(city);
         memberEventSrc.fire(city);
+    } */
+
+
+    public void register(City city) throws Exception {
+        log.info("Registering " + city.getName());
+        cityRepository.addCity(city);
     }
 }
