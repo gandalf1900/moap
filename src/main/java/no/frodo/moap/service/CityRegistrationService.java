@@ -25,16 +25,8 @@ public class CityRegistrationService {
     @Inject
     private Event<City> memberEventSrc;
 
-    /*
     public void register(City city) throws Exception {
-        log.info("Registering " + city.getName());
-        em.persist(city);
-        memberEventSrc.fire(city);
-    } */
-
-
-    public void register(City city) throws Exception {
-        log.info("Registering " + city.getName());
+        log.info("Registering new city " + city.getName());
         cityRepository.addCity(city);
     }
 }

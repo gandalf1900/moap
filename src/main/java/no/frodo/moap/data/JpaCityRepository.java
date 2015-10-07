@@ -44,7 +44,7 @@ public class JpaCityRepository implements CityRepository {
 
     @Override
     public void addCity(City city) {
-        log.info("Registering " + city.getName());
+        log.info("Registering new city " + city.getName());
         em.persist(city);
         memberEventSrc.fire(city);
     }

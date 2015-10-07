@@ -1,8 +1,9 @@
 package no.frodo.moap.web;
 
 import no.frodo.moap.domain.City;
-import no.frodo.moap.data.WeatherRepository;
+import no.frodo.moap.domain.Weather;
 import no.frodo.moap.service.CityRegistrationService;
+import no.frodo.moap.service.WeatherService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -21,28 +22,31 @@ public class WeatherController {
     private FacesContext facesContext;
 
     @Inject
-    private CityRegistrationService cityRegistration;
+    private CityRegistrationService cityRegistrationService;
 
     @Inject
-    private WeatherRepository cityDao;
-    private String name;
+    private WeatherService weatherService;
     private String weatherInfo;
 
     @Produces
     @Named
     private City newCity;
 
+    @Produces
+    @Named
+    private Weather weatherForCity;
+
     @PostConstruct
-    public void initNewCity() {
+    public void initWeatherApp() {
         newCity = new City();
+        weatherForCity = new Weather();
     }
 
     public void register() throws Exception {
         try {
-            cityRegistration.register(newCity);
+            cityRegistrationService.register(newCity);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
             facesContext.addMessage(null, m);
-            initNewCity();
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
@@ -50,21 +54,13 @@ public class WeatherController {
         }
     }
 
-    public void getWeather() throws IOException {
-        City city = cityDao.getForCityName(name);
-        if (city != null) {
+    public void weather() throws IOException {
+        Weather weather = weatherService.getWeatherForCity(this.weatherForCity.getCity());
+        if (weather != null) {
             weatherInfo = "test";
         } else {
             weatherInfo = "null";
         }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getWeatherInfo() {

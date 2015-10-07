@@ -65,8 +65,8 @@
 
     <h4>Hent ut værdata for by</h4>
     <h:form id="getWeatherForm">
-        <h:inputText id="weather" value="" />
-        <h:commandButton action="#{weatherController.getWeather}" value="hent"></h:commandButton>
+        <h:inputText id="weather" value="#{weatherForCity.city}" />
+        <h:commandButton action="#{weatherController.weather}" value="hent"></h:commandButton>
     </h:form>
 
     <p/>
