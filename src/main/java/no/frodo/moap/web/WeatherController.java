@@ -26,6 +26,8 @@ public class WeatherController {
 
     @Inject
     private WeatherService weatherService;
+
+    @Named
     private String weatherInfo;
 
     @Produces
@@ -34,12 +36,11 @@ public class WeatherController {
 
     @Produces
     @Named
-    private Weather weatherForCity;
+    private String weatherForCity;
 
     @PostConstruct
     public void initWeatherApp() {
         newCity = new City();
-        weatherForCity = new Weather();
     }
 
     public void register() throws Exception {
@@ -55,16 +56,12 @@ public class WeatherController {
     }
 
     public void weather() throws IOException {
-        Weather weather = weatherService.getWeatherForCity(this.weatherForCity.getCity());
+        Weather weather = weatherService.getWeatherForCity(weatherForCity);
         if (weather != null) {
-            weatherInfo = "test";
+            weatherInfo = weather.getWeatherData();
         } else {
             weatherInfo = "null";
         }
-    }
-
-    public String getWeatherInfo() {
-        return weatherInfo;
     }
 
     private String getRootErrorMessage(Exception e) {
@@ -84,5 +81,23 @@ public class WeatherController {
         }
         // This is the root cause message
         return errorMessage;
+    }
+
+
+    public String getWeatherForCity() {
+        return weatherForCity;
+    }
+
+    public void setWeatherForCity(String weatherForCity) {
+        this.weatherForCity = weatherForCity;
+    }
+
+
+    public String getWeatherInfo() {
+        return weatherInfo;
+    }
+
+    public void setWeatherInfo(String weatherInfo) {
+        this.weatherInfo = weatherInfo;
     }
 }

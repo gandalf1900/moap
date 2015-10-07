@@ -41,7 +41,7 @@
         <em>No registered cities.</em>
     </h:panelGroup>
 
-    <h:dataTable var="_city" value="#{cities}" endered="#{not empty cities}" styleClass="simpletablestyle">
+    <h:dataTable var="_city" value="#{cities}" rendered="#{not empty cities}" styleClass="simpletablestyle">
         <h:column>
             <f:facet name="header">Id</f:facet>
             #{_city.id}
@@ -65,18 +65,21 @@
 
     <h4>Hent ut værdata for by</h4>
     <h:form id="getWeatherForm">
-        <h:inputText id="weather" value="#{weatherForCity.city}" />
+        <h:inputText id="weather" value="#{weatherController.weatherForCity}" />
         <h:commandButton action="#{weatherController.weather}" value="hent"></h:commandButton>
     </h:form>
 
     <p/>
 
-    <h:panelGroup  layout="block" rendered="#{empty weatherInfo}">
+    <h:panelGroup  layout="block" rendered="#{!not empty weatherController.weatherInfo}">
         <em>ingen værdata hentet</em>
     </h:panelGroup>
 
-    <h:panelGroup styleClass="weatherData" layout="block" rendered="#{empty weatherInfo}">
-        <em>Her er værdata</em>
+    <h:panelGroup styleClass="weatherData" layout="block" rendered="#{not empty weatherController.weatherInfo}" style="width: 700px;height: 150px" >
+
+
+        <p></p>
+        <h:outputText value="#{weatherController.weatherInfo}" ></h:outputText>
     </h:panelGroup>
 
 
