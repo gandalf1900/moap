@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Weather App</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <h:outputScript name="jquery/jquery.js" library="primefaces" />
+    <script type="text/javascript" src="script/weather.js"></script>
+    <h:outputStylesheet name="css/screen.css"/>
+
+</h:head>
+
+<h:body>
+
+    <h4>Weather app</h4>
+
+    <p/>
+    <p/>
+    <br></br>
+
+
+    <h:form id="cityRegistrationForm">
+
+        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+        <h:panelGrid id="cityRegistrationGrid" cellpadding="5" columns="2" style="margin-bottom:10px">
+            <p:inputText id="name" label="name" value="#{weatherPrimeView.newPrimeCity.name}"/>
+            <p:watermark value="Skriv inn ny by " for="name"></p:watermark>
+        </h:panelGrid>
+
+        <h:panelGrid columns="6" cellpadding="5">
+            <p:commandButton id="register" value="Registrer ny by"  ajax="false" update=":allCitiesForm:citiesDataTable" actionListener="#{weatherPrimeView.register}" />
+        </h:panelGrid>
+
+        <p/>
+        <p/>
+
+
+    </h:form>
+
+    <p/>
+    <p/>
+    <br></br>
+
+
+    <h:form id="allCitiesForm">
+        <h2>Registrerte byer</h2>
+        <h:panelGroup rendered="#{empty cities}">
+            <em>No registered cities.</em>
+        </h:panelGroup>
+
+        <p:dataTable id="citiesDataTable" var="_city" value="#{cities}" rendered="#{not empty cities}" styleClass="simpletablestyle">
+            <p:column>
+                <f:facet name="header">Id</f:facet>
+                #{_city.id}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Name</f:facet>
+                #{_city.name}
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">REST URL</f:facet>
+                <a href="#{request.contextPath}/rest/city/#{_city.id}">/rest/cities/#{_city.id}</a>
+            </p:column>
+            <f:facet name="footer">
+                REST URL for all cities: <a  href="#{request.contextPath}/rest/cities">/rest/cities</a>
+            </f:facet>
+
+        </p:dataTable>
+
+        <p/>
+        <p/>
+
+    </h:form>
+
+    <p/>
+    <p/>
+    <br></br>
+
+
+    <h:form id="getWeatherForm">
+
+        <h:panelGrid cellpadding="5" columns="2" style="margin-bottom:10px">
+            <p:inputText id="weather" value="#{weatherPrimeView.weatherForCity}" />
+            <p:watermark value="Hent ut værdata for by" for="weather"></p:watermark>
+        </h:panelGrid>
+        <h:panelGrid columns="6" cellpadding="5">
+            <p:commandButton actionListener="#{weatherPrimeView.weather}" value="Hent" ajax="false" update=":weatherResult"></p:commandButton>
+        </h:panelGrid>
+
+    </h:form>
+
+    <p/>
+    <p/>
+    <br></br>
+
+
+    <p:panelGrid id="weatherResult">
+
+        <h:panelGrid rendered="#{!not empty weatherPrimeView.weatherInfo}">
+            <em>ingen værdata hentet</em>
+        </h:panelGrid>
+
+        <h:panelGrid styleClass="weatherData" style="width: 700px;height: 150px" rendered="#{not empty weatherPrimeView.weatherInfo}">
+            <h:outputText value="#{weatherPrimeView.weatherInfo}"></h:outputText>
+        </h:panelGrid>
+
+    </p:panelGrid>
+
+
+
+
+</h:body>
+</html>

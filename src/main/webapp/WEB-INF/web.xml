@@ -16,7 +16,7 @@
 
     <!-- Welcome page -->
     <welcome-file-list>
-        <welcome-file>weather.xhtml</welcome-file>
+        <welcome-file>weatherPrime.xhtml</welcome-file>
     </welcome-file-list>
 
     <!-- JSF mapping -->
