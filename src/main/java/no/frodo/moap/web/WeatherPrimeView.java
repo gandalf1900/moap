@@ -70,7 +70,7 @@ public class WeatherPrimeView {
         try {
             String name = city.getName();
             cityRegistrationService.delete(city);
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Delete successful for city "+name);
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Delete successful for city "+name);
             facesContext.addMessage(null, m);
         } catch (Exception e) {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "Delete unsuccessful");

@@ -8,12 +8,6 @@
     <ui:define name="content">
 
 
-        <h4>Weather app</h4>
-
-        <p/>
-        <p/>
-        <br></br>
-
         <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
 
         <h:form id="cityRegistrationForm">
@@ -68,9 +62,9 @@
                 <p:column>
 
                     <f:facet name="header"></f:facet>
-                    <p:commandLink value="Slett" action="#{weatherPrimeView.delete(_city)}" ajax="false"
+                    <p:commandButton value="Slett" action="#{weatherPrimeView.delete(_city)}" ajax="false"
                                    update=":allCitiesForm:citiesDataTable">
-                    </p:commandLink>
+                    </p:commandButton>
 
                 </p:column>
 
@@ -90,39 +84,6 @@
         <p/>
         <br></br>
 
-
-        <h:form id="getWeatherForm">
-
-            <h:panelGrid cellpadding="5" columns="2" style="margin-bottom:10px">
-                <p:inputText id="weather" value="#{weatherPrimeView.weatherForCity}"/>
-                <p:watermark value="Hent ut værdata for by" for="weather"></p:watermark>
-            </h:panelGrid>
-            <h:panelGrid columns="6" cellpadding="5">
-                <p:commandButton actionListener="#{weatherPrimeView.weather}" value="Hent" ajax="false"
-                                 update=":weatherResult">
-
-                </p:commandButton>
-            </h:panelGrid>
-
-        </h:form>
-
-        <p/>
-        <p/>
-        <br></br>
-
-
-        <p:panelGrid id="weatherResult">
-
-            <h:panelGrid rendered="#{!not empty weatherPrimeView.weatherInfo}">
-                <em>ingen værdata hentet</em>
-            </h:panelGrid>
-
-            <h:panelGrid styleClass="weatherData" style="width: 700px;height: 150px"
-                         rendered="#{not empty weatherPrimeView.weatherInfo}">
-                <h:outputText value="#{weatherPrimeView.weatherInfo}"></h:outputText>
-            </h:panelGrid>
-
-        </p:panelGrid>
 
     </ui:define>
 </ui:composition>

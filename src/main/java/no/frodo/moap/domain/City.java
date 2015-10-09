@@ -2,7 +2,6 @@ package no.frodo.moap.domain;
 import javax.persistence.*;
 
 @Entity
-// User is a keyword in some SQL dialects!
 @Table(name = "City")
 public class City {
 

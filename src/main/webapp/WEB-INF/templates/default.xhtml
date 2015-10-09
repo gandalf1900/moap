@@ -1,13 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>Weather App</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <h:outputScript name="jquery/jquery.js" library="primefaces" />
     <script type="text/javascript" src="script/weather.js"></script>
     <h:outputStylesheet name="css/screen.css"/>
 
@@ -26,12 +27,32 @@
             <img src="resources/gfx/46.png" />
         </div>
 
+
+        <h4>Weather app</h4>
+
+
+        <!--
+        TOP CONTENT
+        -->
+        <div id="top">
+            <h:form style="border: none">
+                <p:commandButton value="Home" action="weatherPrime.xhtml" ajax="false">
+                </p:commandButton>
+                <p:commandButton value="Hent ut værdata" action="getWeatherData.xhtml" ajax="false" >
+                </p:commandButton>
+                <p:commandButton value="Add member" action="addNewMemberWizard.xhtml" ajax="false" >
+                </p:commandButton>
+            </h:form>
+        </div>
+
+
         <!--
         MAIN CONTENT
         -->
         <div id="content">
             <ui:insert name="content"></ui:insert>
         </div>
+
 
         <!--
         RIGHT SIDE CONTENT
@@ -44,6 +65,7 @@
                 <li><a href="http://www.wildfly.org/">Based on Wildfly project technology</a></li>
             </ul>
         </div>
+
 
         <!--
         FOOTER CONTENT

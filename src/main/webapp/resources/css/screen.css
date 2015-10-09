@@ -42,15 +42,20 @@ body {
   width: 500px;
   margin: 20px;
 }
+
+#top {
+    background: #F1F1F1;
+
+}
+
 #aside {
-  font-size: 0.9em;
+  font-size: 0.7em;
   width: 275px;
-  float: left;
+  float: right;
   margin: 20px 0px;
   border: 1px solid #D5D5D5;
   background: #F1F1F1;
   background-repeat: repeat-x;
-  padding: 20px;
 }
 
 #aside ul {
