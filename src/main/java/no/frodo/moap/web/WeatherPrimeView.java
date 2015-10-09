@@ -56,7 +56,7 @@ public class WeatherPrimeView {
 
     public void weather() throws IOException {
         Weather weather = weatherService.getWeatherForCity(weatherForCity);
-        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Get weather successful");
+        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Get weather successful");
         facesContext.addMessage(null, m);
         if (weather != null) {
             weatherInfo = weather.getWeatherData();
