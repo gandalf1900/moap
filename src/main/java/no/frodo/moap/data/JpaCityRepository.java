@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -51,6 +52,29 @@ public class JpaCityRepository implements CityRepository {
 
     @Override
     public void removeCity(City city) {
+
+        try {
+            //Query query = em.createQuery("SELECT e FROM City e");
+            //List cities = query.getResultList();
+            log.info("Removing city " + city.getName());
+
+            boolean b = em.contains(city);
+
+            Long id = city.getId();
+            City cc =  em.find(City.class, id);
+            if (cc != null) {
+                em.remove(cc);
+            }
+
+            //em.remove(em.contains(city) ? city : em.merge(city));
+
+            //em.createQuery("SELECT e FROM City e");
+            //cities = query.getResultList();
+            memberEventSrc.fire(city);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
 
     }
 

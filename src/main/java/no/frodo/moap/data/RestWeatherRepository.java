@@ -1,8 +1,6 @@
 package no.frodo.moap.data;
 
 
-import no.frodo.moap.data.WeatherRepository;
-import no.frodo.moap.domain.City;
 import no.frodo.moap.domain.Weather;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -12,8 +10,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-
 import java.io.IOException;
+import java.io.InputStream;
 
 public class RestWeatherRepository implements WeatherRepository {
     @Override
@@ -26,16 +24,19 @@ public class RestWeatherRepository implements WeatherRepository {
 
         HttpEntity responseEntity = response.getEntity();
 
-        String json = EntityUtils.toString(responseEntity);
+        String s = EntityUtils.toString(responseEntity);
 
-        System.out.println(json);
+        System.out.println(s);
 
-        JSONObject obj=new JSONObject(json);
+        try {
+            JSONObject json = new JSONObject(s);
+            System.out.println(json.toString(2));
+            return new Weather(json.toString());
+        }  catch (Exception e) {
 
-        System.out.println(obj.toString(2));
-
+        }
         System.out.println("Response Code : " + response.getStatusLine().getStatusCode() + " for city "+name );
 
-        return new Weather(json);
+        return new Weather(s);
     }
 }

@@ -35,7 +35,8 @@
         </h:panelGrid>
 
         <h:panelGrid columns="6" cellpadding="5">
-            <p:commandButton id="register" value="Registrer ny by"  ajax="false" update=":allCitiesForm:citiesDataTable" actionListener="#{weatherPrimeView.register}" />
+            <p:commandButton id="register" value="Registrer ny by"  ajax="false" update=":allCitiesForm:citiesDataTable" actionListener="#{weatherPrimeView.register}">
+            </p:commandButton>
         </h:panelGrid>
 
         <p/>
@@ -50,16 +51,18 @@
 
 
     <h:form id="allCitiesForm">
-        <h2>Registrerte byer</h2>
+        <h2>Registrerte byer</h2>#{cities.size()}
         <h:panelGroup rendered="#{empty cities}">
             <em>No registered cities.</em>
         </h:panelGroup>
 
-        <p:dataTable id="citiesDataTable" var="_city" value="#{cities}" rendered="#{not empty cities}" styleClass="simpletablestyle">
+        <p:dataTable id="citiesDataTable" var="_city" value="#{cities}" rendered="#{not empty cities}" styleClass="simpletablestyle" paginator="true" rows="5"
+                     paginatorPosition="bottom">
             <p:column>
                 <f:facet name="header">Id</f:facet>
                 #{_city.id}
             </p:column>
+
             <p:column>
                 <f:facet name="header">Name</f:facet>
                 #{_city.name}
@@ -69,6 +72,15 @@
                 <f:facet name="header">REST URL</f:facet>
                 <a href="#{request.contextPath}/rest/city/#{_city.id}">/rest/cities/#{_city.id}</a>
             </p:column>
+
+            <p:column>
+
+                <f:facet name="header"></f:facet>
+                <p:commandLink value="Slett" action="#{weatherPrimeView.delete(_city)}" ajax="false" update=":allCitiesForm:citiesDataTable">
+                </p:commandLink>
+
+            </p:column>
+
             <f:facet name="footer">
                 REST URL for all cities: <a  href="#{request.contextPath}/rest/cities">/rest/cities</a>
             </f:facet>
@@ -87,12 +99,16 @@
 
     <h:form id="getWeatherForm">
 
+
+
         <h:panelGrid cellpadding="5" columns="2" style="margin-bottom:10px">
             <p:inputText id="weather" value="#{weatherPrimeView.weatherForCity}" />
             <p:watermark value="Hent ut værdata for by" for="weather"></p:watermark>
         </h:panelGrid>
         <h:panelGrid columns="6" cellpadding="5">
-            <p:commandButton actionListener="#{weatherPrimeView.weather}" value="Hent" ajax="false" update=":weatherResult"></p:commandButton>
+            <p:commandButton actionListener="#{weatherPrimeView.weather}" value="Hent" ajax="false" update=":weatherResult">
+
+            </p:commandButton>
         </h:panelGrid>
 
     </h:form>

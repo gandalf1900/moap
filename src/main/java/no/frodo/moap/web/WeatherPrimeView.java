@@ -56,11 +56,29 @@ public class WeatherPrimeView {
 
     public void weather() throws IOException {
         Weather weather = weatherService.getWeatherForCity(weatherForCity);
+        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Get weather successful");
+        facesContext.addMessage(null, m);
         if (weather != null) {
             weatherInfo = weather.getWeatherData();
         } else {
             weatherInfo = "null";
         }
+    }
+
+    public String delete(City city) {
+
+        try {
+            String name = city.getName();
+            cityRegistrationService.delete(city);
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Delete successful for city "+name);
+            facesContext.addMessage(null, m);
+        } catch (Exception e) {
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "Delete unsuccessful");
+            facesContext.addMessage(null, m);
+        }
+
+        System.out.println("delete city "+city.getName());
+        return null;
     }
 
     public City getNewPrimeCity() {

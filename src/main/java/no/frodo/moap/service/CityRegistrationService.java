@@ -26,7 +26,10 @@ public class CityRegistrationService {
     private Event<City> memberEventSrc;
 
     public void register(City city) throws Exception {
-        log.info("Registering new city " + city.getName());
         cityRepository.addCity(city);
+    }
+
+    public void delete(City city) throws Exception {
+        cityRepository.removeCity(city);
     }
 }
