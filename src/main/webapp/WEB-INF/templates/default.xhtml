@@ -1,10 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>Weather App</title>
@@ -18,13 +19,13 @@
     <div id="container">
 
         <div class="dualbrand">
-            <img src="resources/gfx/01d.png" />
+            <img src="resources/gfx/01d.png"/>
         </div>
         <div class="dualbrand">
-            <img src="resources/gfx/03d.png" />
+            <img src="resources/gfx/03d.png"/>
         </div>
         <div class="dualbrand">
-            <img src="resources/gfx/46.png" />
+            <img src="resources/gfx/46.png"/>
         </div>
 
 
@@ -34,47 +35,50 @@
         <!--
         TOP CONTENT
         -->
-        <div id="top">
-            <h:form style="border: none">
+        <h:form class="topform">
+
                 <p:commandButton value="Home" action="weatherPrime.xhtml" ajax="false">
                 </p:commandButton>
-                <p:commandButton value="Hent ut værdata" action="getWeatherData.xhtml" ajax="false" >
+                <p:commandButton value="Hent ut værdata" action="getWeatherData.xhtml" ajax="false">
                 </p:commandButton>
-                <p:commandButton value="Add member" action="addNewMemberWizard.xhtml" ajax="false" >
+                <p:commandButton value="Add member" action="addNewMemberWizard.xhtml" ajax="false">
                 </p:commandButton>
-            </h:form>
-        </div>
 
+                    <p:commandButton value="Login" action="login.xhtml" ajax="false" style="position: relative; left: 465px">
+                    </p:commandButton>
+                    <p:commandButton value="Logout" action="logout.xhtml" ajax="false" style="position:relative;left: 465px">
+                    </p:commandButton>
+        </h:form>
 
-        <!--
-        MAIN CONTENT
-        -->
-        <div id="content">
-            <ui:insert name="content"></ui:insert>
-        </div>
-
-
-        <!--
-        RIGHT SIDE CONTENT
-        -->
-        <div id="aside">
-            <p>Learn more about the Weather App</p>
-            <ul>
-                <li><a
-                    href="http://openweathermap.org/">Openweather</a></li>
-                <li><a href="http://www.wildfly.org/">Based on Wildfly project technology</a></li>
-            </ul>
-        </div>
-
-
-        <!--
-        FOOTER CONTENT
-        -->
-        <div id="footer">
-            <p>footer sample<br />
-            </p>
-        </div>
-
+    <!--
+    MAIN CONTENT
+    -->
+    <div id="content">
+        <ui:insert name="content"></ui:insert>
     </div>
+
+
+    <!--
+    RIGHT SIDE CONTENT
+    -->
+    <div id="aside">
+        <p>Learn more about the Weather App</p>
+        <ul>
+            <li><a
+                    href="http://openweathermap.org/">Openweather</a></li>
+            <li><a href="http://www.wildfly.org/">Based on Wildfly project technology</a></li>
+        </ul>
+    </div>
+
+
+    <!--
+    FOOTER CONTENT
+    -->
+    <div id="footer">
+        <p>footer sample<br/>
+        </p>
+    </div>
+
+</div>
 </h:body>
-</html>
+        </html>
