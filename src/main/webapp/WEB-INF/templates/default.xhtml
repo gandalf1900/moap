@@ -12,7 +12,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="text/javascript" src="script/weather.js"></script>
     <h:outputStylesheet name="css/screen.css"/>
-
 </h:head>
 
 <h:body>
@@ -31,54 +30,53 @@
 
         <h4>Weather app</h4>
 
+        <h:outputText value="#{userLoginView.userName}, " rendered="#{userLoginView.loggedIn}" style="background-color: lightgreen"></h:outputText>
+        <h:outputText value="you are logged in" rendered="#{userLoginView.loggedIn}" style="background-color: lightgreen"></h:outputText>
 
         <!--
         TOP CONTENT
         -->
         <h:form class="topform">
 
-                <p:commandButton value="Home" action="weatherPrime.xhtml" ajax="false">
-                </p:commandButton>
-                <p:commandButton value="Hent ut værdata" action="getWeatherData.xhtml" ajax="false">
-                </p:commandButton>
-                <p:commandButton value="Add member" action="addNewMemberWizard.xhtml" ajax="false">
-                </p:commandButton>
-
-                    <p:commandButton value="Login" action="login.xhtml" ajax="false" style="position: relative; left: 465px">
-                    </p:commandButton>
-                    <p:commandButton value="Logout" action="logout.xhtml" ajax="false" style="position:relative;left: 465px">
-                    </p:commandButton>
+            <p:commandButton value="Home" action="weatherPrime.xhtml" ajax="false">
+            </p:commandButton>
+            <p:commandButton value="Hent ut værdata" action="getWeatherData.xhtml" ajax="false">
+            </p:commandButton>
+            <p:commandButton value="Add member" action="addNewMemberWizard.xhtml" ajax="false" rendered="#{userLoginView.loggedIn}">
+            </p:commandButton>
+            <p:commandButton value="Login" action="login.xhtml" ajax="false" style="position: relative; left: 465px" rendered="#{!userLoginView.loggedIn}">
+            </p:commandButton>
+            <p:commandButton value="Logout" action="#{userLoginView.logout}" ajax="false" style="position:relative;left: 465px">
+            </p:commandButton>
         </h:form>
 
-    <!--
-    MAIN CONTENT
-    -->
-    <div id="content">
-        <ui:insert name="content"></ui:insert>
+        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+
+        <!--
+        MAIN CONTENT
+        -->
+        <div id="content">
+            <ui:insert name="content"></ui:insert>
+        </div>
+
+        <!--
+        RIGHT SIDE CONTENT
+        -->
+        <div id="aside">
+            <p>Learn more about the Weather App</p>
+            <ul>
+                <li><a href="http://openweathermap.org/">Openweather</a></li>
+                <li><a href="http://www.wildfly.org/">Based on Wildfly project technology</a></li>
+            </ul>
+        </div>
+
+        <!--
+        FOOTER CONTENT
+        -->
+        <div id="footer">
+            <p>footer sample</p>
+        </div>
+
     </div>
-
-
-    <!--
-    RIGHT SIDE CONTENT
-    -->
-    <div id="aside">
-        <p>Learn more about the Weather App</p>
-        <ul>
-            <li><a
-                    href="http://openweathermap.org/">Openweather</a></li>
-            <li><a href="http://www.wildfly.org/">Based on Wildfly project technology</a></li>
-        </ul>
-    </div>
-
-
-    <!--
-    FOOTER CONTENT
-    -->
-    <div id="footer">
-        <p>footer sample<br/>
-        </p>
-    </div>
-
-</div>
 </h:body>
-        </html>
+</html>

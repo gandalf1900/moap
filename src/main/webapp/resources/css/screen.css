@@ -107,7 +107,7 @@ form {
   padding: 1em;
   font: 80%/1 sans-serif;
   width: 375px;
-  border: 1px solid #D5D5D5;
+  border: 3px solid #D5D5D5;
 }
 
 .topform {
@@ -208,7 +208,7 @@ input {
 
 .simpletablestyle td a:hover {
   color:#3883ce;
-  text-decoration:none; 
+  text-decoration:none;
 }
 
 .valid {
@@ -223,4 +223,8 @@ input {
     background-color: skyblue;
     width: 397px;
     height: 50px;
+}
+
+.ui-panelgrid tr, .ui-panelgrid td{
+    border:none !important;
 }

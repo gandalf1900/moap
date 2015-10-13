@@ -1,16 +1,12 @@
 package no.frodo.moap.web;
 
-
-
-        import java.io.Serializable;
-        import javax.faces.application.FacesMessage;
-        import javax.faces.bean.ManagedBean;
-        import javax.faces.bean.ViewScoped;
-        import javax.faces.context.FacesContext;
-
-        import no.frodo.moap.domain.Member;
-        import org.primefaces.event.FlowEvent;
-
+import java.io.Serializable;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import no.frodo.moap.domain.Member;
+import org.primefaces.event.FlowEvent;
 
 @ManagedBean
 @ViewScoped
@@ -42,11 +38,10 @@ public class MemberWizard implements Serializable {
     }
 
     public String onFlowProcess(FlowEvent event) {
-        if(skip) {
+        if (skip) {
             skip = false;   //reset in case user goes back
             return "confirm";
-        }
-        else {
+        } else {
             return event.getNewStep();
         }
     }
