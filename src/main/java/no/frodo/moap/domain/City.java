@@ -6,7 +6,9 @@ import javax.persistence.*;
 public class City {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="city_seq", sequenceName="city_seq", allocationSize=1, initialValue = 5)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="city_seq")
+    @Column(name = "id", updatable=false)
     private Long id;
 
     @Column(unique = true)

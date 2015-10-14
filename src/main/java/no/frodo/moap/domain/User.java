@@ -3,7 +3,7 @@ package no.frodo.moap.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "Myuser")
 public class User {
 
     @Id
@@ -18,6 +18,10 @@ public class User {
 
     @Column
     private String role;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getUserName() {
         return userName;

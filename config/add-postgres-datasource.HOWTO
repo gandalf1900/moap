@@ -1,0 +1,52 @@
+
+1) Last ned postgres jdbc driver fra https://jdbc.postgresql.org/download.html. Eksempelvis postgresql-9.4-1204.jdbc4.jar
+
+2) Legg driver på JBOSS_INSTALL\bin
+
+3) Start opp jboss server. Kjør JBOSS_INSTALL\bin\standalone.sh
+
+4) Koble til jboss med cli. Kjør JBOSS_INSTALL\bin\jboss-cli.sh --connect
+
+5) Kjør på [standalone@localhost:9990 /] følgende kommandoer:
+
+    a) [standalone@localhost:9990 /] module add --name=org.postgres --resources=postgresql-9.4-1204.jdbc4.jar --dependencies=javax.api,javax.transaction.api
+       (innstallerer modulen)
+
+    b) /subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgres",driver-class-name=org.postgresql.Driver)
+       (innstallerer driver på app server standalone.xml)
+
+    c) data-source add --jndi-name=java:/PostGreDS --name=PostgrePool --connection-url=jdbc:postgresql://localhost/postgres --driver-name=postgres --user-name=postgres --password=postgres
+       (installerer datasource)
+
+5) Legg merke til ny katalog org\postgres\main med driveren (fra a) under JBOSS_INSTALL\modules\ samt at standalone.xml (fra b og c) har blitt oppdatert:
+
+                    <datasource jndi-name="java:/PostGreDS" pool-name="PostgrePool">
+                        <connection-url>jdbc:postgresql://localhost/postgres</connection-url>
+                        <driver>postgres</driver>
+                        <security>
+                            <user-name>postgres</user-name>
+                            <password>postgres</password>
+                        </security>
+                    </datasource>
+
+                    <driver name="postgres" module="org.postgres">
+                        <driver-class>org.postgresql.Driver</driver-class>
+                    </driver>
+
+    Legg også merke til i loggen:
+
+    10:49:02,332 INFO  [org.jboss.as.connector.subsystems.datasources] (management-handler-thread - 5) WFLYJCA0005: Deploying non-JDBC-compliant driver class org.postgresql.Driver (version 9.4)
+    10:49:02,333 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0018: Started Driver service with driver-name = postgres
+    10:50:16,749 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-6) WFLYJCA0001: Bound data source [java:/PostGreDS]
+
+6) Fix portnummer i postgres datasource:
+   Endre connection-url til
+     <connection-url>jdbc:postgresql://localhost:5432/postgres</connection-url>
+
+7) Stopp og start server og sjekk at du nok en gang ser denne i loggen:
+   10:53:08,301 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-5) WFLYJCA0001: Bound data source [java:/PostGreDS]
+
+8) Alle nødvendig og ferdigkonfigurerte kataloger filer er også lagt til i prosjektet. under config\postgres.
+
+9) DONE :-) Postgresql datasource er nå lagt til.
+
