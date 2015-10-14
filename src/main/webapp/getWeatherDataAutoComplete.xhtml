@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="content">
+
+        <h:form id="getWeatherForm">
+
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <p:autoComplete id="weather" value="#{weatherPrimeView.weatherForCity}" completeMethod="#{weatherPrimeView.findCityByPrefix}"
+                        converter="cityConverter" itemValue="#{weatherPrimeView.city}">
+                </p:autoComplete>
+                <p:watermark for="weather" value="Skriv inn by" ></p:watermark>
+                <p:commandButton value="Hent" update="output" oncomplete="PF('dlg').show()" />
+
+            </h:panelGrid>
+
+            <p:dialog header="Values" resizable="false" showEffect="fade" widgetVar="dlg">
+                <p:panelGrid id="output" columns="2" columnClasses="label, value">
+                    <h:outputText value="Weatherinfo" />
+                    <h:outputText value="#{weatherPrimeView.weatherInfo}" />
+                </p:panelGrid>
+            </p:dialog>
+
+        </h:form>
+
+        <p/><p/><br></br>
+
+
+
+        <p:panelGrid id="weatherResult">
+            <h:panelGrid rendered="#{!not empty weatherPrimeView.weatherInfo}">
+                <em>ingen værdata hentet</em>
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="weatherData" style="width: 700px;height: 150px"
+                         rendered="#{not empty weatherPrimeView.weatherInfo}">
+                <h:outputText value="#{weatherPrimeView.weatherInfo}"></h:outputText>
+            </h:panelGrid>
+        </p:panelGrid>
+
+    </ui:define>
+</ui:composition>
+

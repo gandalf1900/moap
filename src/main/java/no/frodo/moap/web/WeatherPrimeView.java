@@ -14,6 +14,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @ManagedBean
 @RequestScoped
@@ -43,6 +45,10 @@ public class WeatherPrimeView {
         newPrimeCity = new City();
     }
 
+    /**
+     * Registrer ny by
+     * @throws Exception
+     */
     public void register() throws Exception {
         try {
             cityRegistrationService.register(newPrimeCity);
@@ -54,6 +60,10 @@ public class WeatherPrimeView {
         }
     }
 
+    /**
+     * Hent ut weather
+     * @return
+     */
     public void weather() throws IOException {
         Weather weather = weatherService.getWeatherForCity(weatherForCity);
         FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Get weather successful");
@@ -63,6 +73,23 @@ public class WeatherPrimeView {
         } else {
             weatherInfo = "null";
         }
+    }
+
+    /**
+     * Hent ut city by autocomplete
+     * @param query
+     * @return
+     */
+    public List<City> findCityByPrefix(String query) {
+        List<City> results = null;
+        try {
+            results = cityRegistrationService.findByNameLike(query);
+        } catch (Exception e) {
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "findCityByPrefix unsuccessful");
+            facesContext.addMessage(null, m);
+        }
+
+        return results;
     }
 
     public String delete(City city) {

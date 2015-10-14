@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Stateless
@@ -31,5 +32,9 @@ public class CityRegistrationService {
 
     public void delete(City city) throws Exception {
         cityRepository.removeCity(city);
+    }
+
+    public List<City> findByNameLike(String name) throws Exception {
+        return cityRepository.findByNameLike(name);
     }
 }

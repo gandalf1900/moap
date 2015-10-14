@@ -20,15 +20,11 @@
                 </p:commandButton>
             </h:panelGrid>
 
-            <p/>
-            <p/>
-
+            <p/><p/>
 
         </h:form>
 
-        <p/>
-        <p/>
-        <br></br>
+        <p/><p/><br></br>
 
 
         <h:form id="allCitiesForm">
@@ -37,31 +33,24 @@
                 <em>No registered cities.</em>
             </h:panelGroup>
 
-            <p:dataTable id="citiesDataTable" var="_city" value="#{cities}" rendered="#{not empty cities}"
-                         styleClass="simpletablestyle" paginator="true" rows="5"
-                         paginatorPosition="bottom">
-                <p:column>
-                    <f:facet name="header">Id</f:facet>
-                    #{_city.id}
+            <p:dataTable id="citiesDataTable" var="city" value="#{cities}" rendered="#{not empty cities}"
+                         styleClass="simpletablestyle" paginator="true" rows="5" paginatorPosition="bottom">
+
+                <p:column headerText="Id" sortBy="#{city.id}">
+                    <h:outputText value="#{city.id}" />
+                </p:column>
+
+                <p:column  headerText="Name" sortBy="#{city.name}">
+                    <h:outputText value="#{city.name}" />
+                </p:column>
+
+                <p:column  headerText="REST URL">
+                    <a href="#{request.contextPath}/rest/city/#{_city.id}">/rest/cities/#{city.id}</a>
                 </p:column>
 
                 <p:column>
-                    <f:facet name="header">Name</f:facet>
-                    #{_city.name}
-                </p:column>
-
-                <p:column>
-                    <f:facet name="header">REST URL</f:facet>
-                    <a href="#{request.contextPath}/rest/city/#{_city.id}">/rest/cities/#{_city.id}</a>
-                </p:column>
-
-                <p:column>
-
-                    <f:facet name="header"></f:facet>
-                    <p:commandButton value="Slett" action="#{weatherPrimeView.delete(_city)}" ajax="false"
-                                   update=":allCitiesForm:citiesDataTable">
+                    <p:commandButton value="Slett" action="#{weatherPrimeView.delete(city)}" ajax="false" update=":allCitiesForm:citiesDataTable">
                     </p:commandButton>
-
                 </p:column>
 
                 <f:facet name="footer">
@@ -70,15 +59,11 @@
 
             </p:dataTable>
 
-            <p/>
-            <p/><br></br>
+            <p/><p/><br></br>
 
         </h:form>
 
-        <p/>
-
-        <p/>
-        <br></br>
+        <p/><p/> <br></br>
 
 
     </ui:define>

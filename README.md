@@ -19,6 +19,7 @@ Database: H2 in memory
 
 0) Legg ved UML kommunikasjonsdiagram for registrer ny by
 1) hent ut værdata for by
-2) generer javaklasser fra wsdl  (ett eksempep bare)
+2) generer javaklasser fra wsdl  (ett eksempel bare)
 3) deploy app på openshift
 4) Logg inn modul
+5) autocomplete for hent ut værdata for by
