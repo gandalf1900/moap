@@ -11,7 +11,9 @@
     <title>Weather App</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="text/javascript" src="script/weather.js"></script>
+    <script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.js"></script>
     <h:outputStylesheet name="css/screen.css"/>
+    <h:outputStylesheet name="bootstrap-3.3.5-dist/css/bootstrap.css"/>
 </h:head>
 
 <h:body>
@@ -28,25 +30,28 @@
         </div>
 
 
+
         <h4>Weather app</h4>
 
-        <h:outputText value="#{userLoginView.userName}, " rendered="#{userLoginView.loggedIn}" style="background-color: lightgreen"></h:outputText>
-        <h:outputText value="you are logged in" rendered="#{userLoginView.loggedIn}" style="background-color: lightgreen"></h:outputText>
+
+        <h:outputText value="#{userLoginView.userName}, " rendered="#{userLoginView.loggedIn}"
+                      style="background-color: lightgreen"></h:outputText>
+        <h:outputText value="you are logged in" rendered="#{userLoginView.loggedIn}"
+                      style="background-color: lightgreen"></h:outputText>
 
         <!--
         TOP CONTENT
         -->
         <h:form class="topform">
-
             <p:commandButton value="Home" action="cityRegistration.xhtml" ajax="false">
             </p:commandButton>
             <p:commandButton value="Hent ut værdata" action="getWeatherDataAutoComplete.xhtml" ajax="false">
             </p:commandButton>
             <p:commandButton value="Add member" action="addNewMemberWizard.xhtml" ajax="false" rendered="#{userLoginView.loggedIn}">
             </p:commandButton>
-            <p:commandButton value="Login" action="login.xhtml" ajax="false" style="position: relative; left: 465px" rendered="#{!userLoginView.loggedIn}">
+            <p:commandButton value="Login" action="login.xhtml" ajax="false" style="position: relative; left: 550px" rendered="#{!userLoginView.loggedIn}">
             </p:commandButton>
-            <p:commandButton value="Logout" action="#{userLoginView.logout}" ajax="false" style="position:relative;left: 465px">
+            <p:commandButton value="Logout" action="#{userLoginView.logout}" ajax="false" style="position:relative;left: 430px" rendered="#{userLoginView.loggedIn}">
             </p:commandButton>
         </h:form>
 

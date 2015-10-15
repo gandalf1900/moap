@@ -7,7 +7,7 @@
 
     <ui:define name="content">
 
-        <h:form id="cityRegistrationForm">
+        <h:form id="cityRegistrationForm" class="myform">
 
             <h:panelGrid id="cityRegistrationGrid" cellpadding="5" columns="2" style="margin-bottom:10px">
                 <p:inputText id="name" label="name" value="#{cityRegistrationView.newPrimeCity.name}"/>
@@ -15,8 +15,7 @@
             </h:panelGrid>
 
             <h:panelGrid columns="6" cellpadding="5">
-                <p:commandButton id="register" value="Registrer ny by" ajax="false"
-                                 update=":allCitiesForm:citiesDataTable" actionListener="#{cityRegistrationView.registerNewCity}">
+                <p:commandButton id="register" value="Registrer ny by" ajax="false" update=":allCitiesForm:citiesDataTable" actionListener="#{cityRegistrationView.registerNewCity}">
                 </p:commandButton>
             </h:panelGrid>
 
@@ -27,8 +26,8 @@
         <p/><p/><br></br>
 
 
-        <h:form id="allCitiesForm">
-            <h2>Registrerte byer</h2>#{cities.size()}
+        <h:form id="allCitiesForm" class="myform">
+            Registrerte byer#{cities.size()}
             <h:panelGroup rendered="#{empty cities}">
                 <em>No registered cities.</em>
             </h:panelGroup>

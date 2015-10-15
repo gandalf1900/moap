@@ -103,7 +103,7 @@ span.invalid {
   color: red;
 }
 
-form {
+.myform {
   padding: 1em;
   font: 80%/1 sans-serif;
   width: 375px;
@@ -115,7 +115,7 @@ form {
     font: 80%/1 sans-serif;
     border: none;
     background: #F1F1F1;
-    width: 843px;
+    width: 815px;
 }
 
 label {
