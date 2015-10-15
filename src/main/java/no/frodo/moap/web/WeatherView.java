@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -54,7 +55,7 @@ public class WeatherView {
      * @param query
      * @return
      */
-    public List<City> findCityByPrefix(String query) {
+    public List<String> findCityByPrefix(String query) {
         List<City> results = null;
         try {
             results = cityRegistrationService.findByNameLike(query);
@@ -63,7 +64,12 @@ public class WeatherView {
             facesContext.addMessage(null, m);
         }
 
-        return results;
+        List<String> cityListAsString = new ArrayList();
+        for (City c : results) {
+            cityListAsString.add(c.getName());
+        }
+
+        return cityListAsString;
     }
 
     public String getWeatherInfo() {
