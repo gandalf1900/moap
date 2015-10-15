@@ -10,11 +10,11 @@
         <h:form id="getWeatherForm">
 
             <h:panelGrid cellpadding="5" columns="2" style="margin-bottom:10px">
-                <p:inputText id="weather" value="#{weatherPrimeView.weatherForCity}"/>
+                <p:inputText id="weather" value="#{cityRegistrationView.weatherForCity}"/>
                 <p:watermark value="Hent ut værdata for by" for="weather"></p:watermark>
             </h:panelGrid>
             <h:panelGrid columns="6" cellpadding="5">
-                <p:commandButton actionListener="#{weatherPrimeView.weather}" value="Hent" ajax="false" update=":weatherResult">
+                <p:commandButton actionListener="#{cityRegistrationView.weather}" value="Hent" ajax="false" update=":weatherResult">
                 </p:commandButton>
             </h:panelGrid>
 
@@ -26,13 +26,13 @@
 
 
         <p:panelGrid id="weatherResult">
-            <h:panelGrid rendered="#{!not empty weatherPrimeView.weatherInfo}">
+            <h:panelGrid rendered="#{!not empty cityRegistrationView.weatherInfo}">
                 <em>ingen værdata hentet</em>
             </h:panelGrid>
 
             <h:panelGrid styleClass="weatherData" style="width: 700px;height: 150px"
-                         rendered="#{not empty weatherPrimeView.weatherInfo}">
-                <h:outputText value="#{weatherPrimeView.weatherInfo}"></h:outputText>
+                         rendered="#{not empty cityRegistrationView.weatherInfo}">
+                <h:outputText value="#{cityRegistrationView.weatherInfo}"></h:outputText>
             </h:panelGrid>
         </p:panelGrid>
 

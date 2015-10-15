@@ -10,13 +10,13 @@
         <h:form id="cityRegistrationForm">
 
             <h:panelGrid id="cityRegistrationGrid" cellpadding="5" columns="2" style="margin-bottom:10px">
-                <p:inputText id="name" label="name" value="#{weatherPrimeView.newPrimeCity.name}"/>
+                <p:inputText id="name" label="name" value="#{cityRegistrationView.newPrimeCity.name}"/>
                 <p:watermark value="Skriv inn ny by " for="name"></p:watermark>
             </h:panelGrid>
 
             <h:panelGrid columns="6" cellpadding="5">
                 <p:commandButton id="register" value="Registrer ny by" ajax="false"
-                                 update=":allCitiesForm:citiesDataTable" actionListener="#{weatherPrimeView.register}">
+                                 update=":allCitiesForm:citiesDataTable" actionListener="#{cityRegistrationView.registerNewCity}">
                 </p:commandButton>
             </h:panelGrid>
 
@@ -49,7 +49,7 @@
                 </p:column>
 
                 <p:column>
-                    <p:commandButton value="Slett" action="#{weatherPrimeView.delete(city)}" ajax="false" update=":allCitiesForm:citiesDataTable">
+                    <p:commandButton value="Slett" action="#{cityRegistrationView.delete(city)}" ajax="false" update=":allCitiesForm:citiesDataTable">
                     </p:commandButton>
                 </p:column>
 

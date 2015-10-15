@@ -16,6 +16,7 @@ import java.io.IOException;
 
 @Named
 @RequestScoped
+@Deprecated
 public class WeatherController {
 
     @Inject
@@ -34,7 +35,6 @@ public class WeatherController {
     @Named
     private City newCity;
 
-    @Produces
     @Named
     private String weatherForCity;
 

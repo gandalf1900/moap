@@ -11,8 +11,8 @@
 
             <h:panelGrid columns="2" cellpadding="5">
 
-                <p:autoComplete id="weather" value="#{weatherPrimeView.weatherForCity}" completeMethod="#{weatherPrimeView.findCityByPrefix}"
-                        converter="cityConverter" itemValue="#{weatherPrimeView.city}">
+                <p:autoComplete id="weather" value="#{weatherView.weatherForCity}" completeMethod="#{weatherView.findCityByPrefix}"
+                        converter="cityConverter" itemValue="#{weatherView.weatherForCity}">
                 </p:autoComplete>
                 <p:watermark for="weather" value="Skriv inn by" ></p:watermark>
                 <p:commandButton value="Hent" update="output" oncomplete="PF('dlg').show()" />
@@ -22,7 +22,7 @@
             <p:dialog header="Values" resizable="false" showEffect="fade" widgetVar="dlg">
                 <p:panelGrid id="output" columns="2" columnClasses="label, value">
                     <h:outputText value="Weatherinfo" />
-                    <h:outputText value="#{weatherPrimeView.weatherInfo}" />
+                    <h:outputText value="#{weatherView.weatherInfo}" />
                 </p:panelGrid>
             </p:dialog>
 
@@ -33,13 +33,12 @@
 
 
         <p:panelGrid id="weatherResult">
-            <h:panelGrid rendered="#{!not empty weatherPrimeView.weatherInfo}">
+            <h:panelGrid rendered="#{!not empty weatherView.weatherInfo}">
                 <em>ingen værdata hentet</em>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="weatherData" style="width: 700px;height: 150px"
-                         rendered="#{not empty weatherPrimeView.weatherInfo}">
-                <h:outputText value="#{weatherPrimeView.weatherInfo}"></h:outputText>
+            <h:panelGrid styleClass="weatherData" style="width: 700px;height: 150px" rendered="#{not empty weatherView.weatherInfo}">
+                <h:outputText value="#{weatherView.weatherInfo}"></h:outputText>
             </h:panelGrid>
         </p:panelGrid>
 

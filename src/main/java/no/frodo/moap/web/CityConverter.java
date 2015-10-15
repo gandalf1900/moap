@@ -16,15 +16,10 @@ import org.apache.commons.lang.StringUtils;
 @FacesConverter(value = "cityConverter")
 public class CityConverter implements Converter {
 
-    @Inject
-    CityRepository cityRepository;
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        if (StringUtils.isEmpty(value)) {
-            return null;
-        }
-        return cityRepository.findByName(value);
+        return null;
     }
 
     @Override

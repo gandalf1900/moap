@@ -10,7 +10,7 @@ import org.primefaces.event.FlowEvent;
 
 @ManagedBean
 @ViewScoped
-public class MemberWizard implements Serializable {
+public class MemberView implements Serializable {
 
     private Member member = new Member();
 
