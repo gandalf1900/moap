@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="content">
+
+        <h:form id="getWeatherForm" class="myform">
+
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <p:autoComplete id="weather" value="#{weatherView.weatherForCity}" completeMethod="#{weatherView.findCityByPrefix}">
+                </p:autoComplete>
+                <p:watermark for="weather" value="Skriv inn by" ></p:watermark>
+                <p:commandButton actionListener="#{weatherView.weather}" value="Hent" ajax="false" update=":weatherResult">
+                </p:commandButton>
+
+            </h:panelGrid>
+
+        </h:form>
+
+        <p/><p/><br></br>
+
+        <p:panelGrid id="weatherResult">
+            <h:panelGrid rendered="#{!not empty weatherView.weatherInfo}">
+                <em>ingen værdata hentet</em>
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="weatherData" style="width: 700px;height: 150px" rendered="#{not empty weatherView.weatherInfo}">
+                <h:outputText value="#{weatherView.weatherInfo}"></h:outputText>
+            </h:panelGrid>
+        </p:panelGrid>
+
+    </ui:define>
+</ui:composition>
+

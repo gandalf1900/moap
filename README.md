@@ -23,3 +23,4 @@ Database: H2 in memory
 3) deploy app på openshift
 4) Logg inn modul
 5) autocomplete for hent ut værdata for by
+6)
