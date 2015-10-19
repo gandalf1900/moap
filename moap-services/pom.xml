@@ -12,13 +12,13 @@
 	<artifactId>moap-services</artifactId>
 	<packaging>jar</packaging>
 	<name>moap services</name>
-	
-	<dependencies>
+
+    <dependencies>
         <dependency>
             <groupId>no.frodo</groupId>
             <artifactId>moap-client</artifactId>
             <version>${project.version}</version>
         </dependency>
-	</dependencies>
-	
+    </dependencies>
+
 </project>

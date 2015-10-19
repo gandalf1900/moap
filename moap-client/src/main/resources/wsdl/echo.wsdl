@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://ws.service.moap.frodo.no/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="EchoServiceImplService"
+                  targetNamespace="http://ws.service.moap.frodo.no/">
+    <wsdl:message name="echoResponse">
+        <wsdl:part name="return" type="xsd:string">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="echo">
+        <wsdl:part name="arg0" type="xsd:string">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="EchoServiceWS">
+        <wsdl:operation name="echo">
+            <wsdl:input message="tns:echo" name="echo">
+            </wsdl:input>
+            <wsdl:output message="tns:echoResponse" name="echoResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="EchoServiceImplServiceSoapBinding" type="tns:EchoServiceWS">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="echo">
+            <soap:operation soapAction="" style="rpc"/>
+            <wsdl:input name="echo">
+                <soap:body namespace="http://ws.service.moap.frodo.no/" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="echoResponse">
+                <soap:body namespace="http://ws.service.moap.frodo.no/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="EchoServiceImplService">
+        <wsdl:port binding="tns:EchoServiceImplServiceSoapBinding" name="EchoServiceImplPort">
+            <soap:address location="http://localhost:8080/moap/EchoServiceImpl"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
