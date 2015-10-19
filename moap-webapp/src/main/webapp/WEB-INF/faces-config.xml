@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!-- Marker file indicating JSF 2.2 should be enabled in the application -->
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="
+        http://xmlns.jcp.org/xml/ns/javaee
+        http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userLoginView.validateUsernamePassword}</from-action>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/cityRegistration.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/cityRegistration.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userLoginView.logout}</from-action>
+            <from-outcome>logoutSuccess</from-outcome>
+            <to-view-id>/cityRegistration.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+</faces-config>

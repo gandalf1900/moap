@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="content">
+
+        <h:form id="cityRegistrationForm" class="myform">
+
+            <h:panelGrid id="cityRegistrationGrid" cellpadding="5" columns="2">
+                <p:inputText id="name" label="name" value="#{cityRegistrationView.newPrimeCity.name}"/>
+                <p:watermark value="Skriv inn ny by " for="name"></p:watermark>
+            </h:panelGrid>
+
+            <h:panelGrid columns="6" cellpadding="5">
+                <p:commandButton id="register" value="Registrer ny by" ajax="false" update=":allCitiesForm:citiesDataTable" actionListener="#{cityRegistrationView.registerNewCity}">
+                </p:commandButton>
+            </h:panelGrid>
+
+            <p/><p/>
+
+        </h:form>
+
+        <p/><p/><br></br>
+
+
+        <h:form id="allCitiesForm" class="myform">
+            Registrerte byer#{cities.size()}
+            <h:panelGroup rendered="#{empty cities}">
+                <em>No registered cities.</em>
+            </h:panelGroup>
+
+            <p:dataTable id="citiesDataTable" var="city" value="#{cities}" rendered="#{not empty cities}"
+                         styleClass="simpletablestyle" paginator="true" rows="5" paginatorPosition="bottom">
+
+                <p:column headerText="Id" sortBy="#{city.id}">
+                    <h:outputText value="#{city.id}" />
+                </p:column>
+
+                <p:column  headerText="Name" sortBy="#{city.name}">
+                    <h:outputText value="#{city.name}" />
+                </p:column>
+
+                <p:column  headerText="REST URL">
+                    <a href="#{request.contextPath}/rest/city/#{_city.id}">/rest/cities/#{city.id}</a>
+                </p:column>
+
+                <p:column>
+                    <p:commandButton value="Slett" action="#{cityRegistrationView.delete(city)}" ajax="false" update=":allCitiesForm:citiesDataTable">
+                    </p:commandButton>
+                </p:column>
+
+                <f:facet name="footer">
+                    REST URL for all cities: <a href="#{request.contextPath}/rest/cities">/rest/cities</a>
+                </f:facet>
+
+            </p:dataTable>
+
+            <p/><p/><br></br>
+
+        </h:form>
+
+        <p/><p/> <br></br>
+
+
+    </ui:define>
+</ui:composition>
+

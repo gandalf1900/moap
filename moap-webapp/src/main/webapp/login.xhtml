@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="content">
+
+        <h:form class="myform">
+            <p:panelGrid columns="2">
+                <h:outputText value="Username" />
+                <p:inputText id="username" value="#{userLoginView.userName}"></p:inputText>
+
+                <h:outputText value="Password" />
+                <p:password id="password" value="#{userLoginView.password}"></p:password>
+            </p:panelGrid>
+
+            <p:commandButton action="#{userLoginView.validateUsernamePassword}" value="Login">
+            </p:commandButton>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+

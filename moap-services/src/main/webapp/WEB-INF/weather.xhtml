@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Weather App</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="../script/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../script/weather.js"></script>
+    <h:outputStylesheet name="css/screen.css"/>
+
+</h:head>
+
+<h:body>
+
+    <h4>Weather app</h4>
+    <h:form id="cityRegistrationForm">
+
+        <h:panelGrid columns="3" columnClasses="titleCell">
+            <h:outputLabel for="name" value="Name:" />
+            <h:inputText id="name" value="#{newCity.name}" />
+            <h:message for="name" errorClass="invalid" />
+        </h:panelGrid>
+
+        <p/>
+
+        <h:panelGrid columns="2">
+            <h:commandButton id="register" action="#{weatherController.register}" value="Register ny by" styleClass="register" />
+            <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning" globalOnly="true" />
+        </h:panelGrid>
+
+        <p/>
+
+    </h:form>
+
+    <h4>Registrerte byer</h4>
+    <h:panelGroup rendered="#{empty cities}">
+        <em>No registered cities.</em>
+    </h:panelGroup>
+
+    <h:dataTable var="_city" value="#{cities}" rendered="#{not empty cities}" styleClass="simpletablestyle">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{_city.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            #{_city.name}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">REST URL</f:facet>
+            <a
+                    href="#{request.contextPath}/rest/city/#{_city.id}">/rest/cities/#{_city.id}</a>
+        </h:column>
+        <f:facet name="footer">
+            REST URL for all cities: <a  href="#{request.contextPath}/rest/cities">/rest/cities</a>
+        </f:facet>
+    </h:dataTable>
+
+    <p/>
+
+    <h4>Hent ut værdata for by</h4>
+    <h:form id="getWeatherForm">
+        <h:inputText id="weather" value="#{weatherController.weatherForCity}" />
+        <h:commandButton action="#{weatherController.weather}" value="hent"></h:commandButton>
+    </h:form>
+
+    <p/>
+
+    <h:panelGroup  layout="block" rendered="#{!not empty weatherController.weatherInfo}">
+        <em>ingen værdata hentet</em>
+    </h:panelGroup>
+
+    <h:panelGroup styleClass="weatherData" layout="block" rendered="#{not empty weatherController.weatherInfo}" style="width: 700px;height: 150px" >
+        <p></p>
+        <h:outputText value="#{weatherController.weatherInfo}" ></h:outputText>
+    </h:panelGroup>
+
+
+</h:body>
+</html>
