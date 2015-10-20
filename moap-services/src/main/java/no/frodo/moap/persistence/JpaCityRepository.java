@@ -31,6 +31,14 @@ public class JpaCityRepository implements CityRepository {
     }
 
     @Override
+    public City findById(Long id) {
+        TypedQuery<City> query = em.createQuery("select c from City c where c.id = :id", City.class);
+        query.setParameter("id", id);
+        City result = query.getSingleResult();
+        return result;
+    }
+
+    @Override
     public List<City> findByNameLike(String prefix) {
         log.info("findByNameLike");
 

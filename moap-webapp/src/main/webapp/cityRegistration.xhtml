@@ -44,7 +44,7 @@
                 </p:column>
 
                 <p:column  headerText="REST URL">
-                    <a href="#{request.contextPath}/rest/city/#{_city.id}">/rest/cities/#{city.id}</a>
+                    <a href="#{request.contextPath}/rest/moap/#{city.id}">/rest/moap/#{city.id}</a>
                 </p:column>
 
                 <p:column>
@@ -53,7 +53,7 @@
                 </p:column>
 
                 <f:facet name="footer">
-                    REST URL for all cities: <a href="#{request.contextPath}/rest/cities">/rest/cities</a>
+                    REST URL for all cities: <a href="#{request.contextPath}/rest/moap">/rest/moap</a>
                 </f:facet>
 
             </p:dataTable>

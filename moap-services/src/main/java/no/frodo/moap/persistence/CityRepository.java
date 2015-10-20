@@ -8,6 +8,8 @@ public interface CityRepository {
 
     public String findByName(String name);
 
+    public City findById(Long id);
+
     public List<City> findByNameLike(String name);
 
     public List<City> findAllCitiesOrderedByName();
